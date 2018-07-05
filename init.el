@@ -23,9 +23,10 @@
     ("ec0c9d1715065a594af90e19e596e737c7b2cdaa18eb1b71baf7ef696adbefb0" default)))
  '(package-selected-packages
    (quote
-    (flycheck-demjsonlint flycheck json-mode string-inflection cql-mode feature-mode magit haskell-mode elpy mustache-mode yaml-mode cucumber-goto-step exec-path-from-shell go-complete go-mode))))
-;;set up json linting
-(require 'flycheck-demjsonlint)
+    (highlight-indent-guides flycheck-demjsonlint flycheck json-mode string-inflection cql-mode feature-mode magit haskell-mode elpy mustache-mode yaml-mode cucumber-goto-step exec-path-from-shell go-complete go-mode))))
+
+
+
 
 
 (custom-set-faces
@@ -36,6 +37,7 @@
  )
 
 
+;; Added for MacOs to make sure Emacs uses the proper $PATH
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
@@ -47,6 +49,7 @@
 
 (when window-system (set-exec-path-from-shell-PATH))
 
+;; GO related 
 (setenv "GOPATH" "/Users/g/Workspace/Go")
 
 (add-to-list 'exec-path "/Users/g/Workspace/Go/bin:")
@@ -81,10 +84,15 @@
 
 ;; Tidal cycles configuration
 
-(setq load-path (cons "/usr/local/share/emacs/site-lisp/tidal" load-path))
-(require 'tidal)
-(setq tidal-interpreter "/usr/local/bin/ghci")
+;;(setq load-path (cons "/usr/local/share/emacs/site-lisp/tidal" load-path))
+;;(require 'tidal)
+;;(setq tidal-interpreter "/usr/local/bin/ghci")
 
 
 ;; Git
 (global-set-key (kbd "C-x g") 'magit-status)
+
+;;set up linting
+(add-hook 'after-init-hook #'global-flycheck-mode)
+;;set up json linting
+;;(require 'flycheck-demjsonlint)
