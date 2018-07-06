@@ -1,11 +1,20 @@
-
+;;; init.el --- Initialization file for Emacs
+;;; Commentary: Emacs Startup File --- initialization for Emacs
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
+
+;;;Code
+
+;;; Commentary:
+;; 
+
 (require 'package)
+;;; Code:
+
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
@@ -23,7 +32,7 @@
     ("ec0c9d1715065a594af90e19e596e737c7b2cdaa18eb1b71baf7ef696adbefb0" default)))
  '(package-selected-packages
    (quote
-    (highlight-indent-guides flycheck-demjsonlint flycheck json-mode string-inflection cql-mode feature-mode magit haskell-mode elpy mustache-mode yaml-mode cucumber-goto-step exec-path-from-shell go-complete go-mode))))
+    (smart-shift highlight-indent-guides flycheck-demjsonlint flycheck json-mode string-inflection cql-mode feature-mode magit haskell-mode elpy mustache-mode yaml-mode cucumber-goto-step exec-path-from-shell go-complete go-mode))))
 
 
 
@@ -49,7 +58,7 @@
 
 (when window-system (set-exec-path-from-shell-PATH))
 
-;; GO related 
+;;;GO related
 (setenv "GOPATH" "/Users/g/Workspace/Go")
 
 (add-to-list 'exec-path "/Users/g/Workspace/Go/bin:")
@@ -96,3 +105,21 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 ;;set up json linting
 ;;(require 'flycheck-demjsonlint)
+
+;; indentation highlighting for the highlight indent mode - only
+;;(set-face-background 'highlight-indentation-face "#FFFF00")
+;;(set-face-background 'highlight-indentation-current-column-face "#FFFF00")
+
+;;set json indent to 2
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
+;; (eval-after-load 'json-mode
+;;   '(progn
+;;      (add-to-list 'smart-shift-mode-alist
+;;                   '(major-mode-or-derived-mode . customize-base-offset))))
+
+(provide 'init)
+
+;;; init.el ends here
