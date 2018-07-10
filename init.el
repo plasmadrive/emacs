@@ -21,6 +21,10 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
+;;; Add all subdirectories of the packages directory to the loadpath
+(let ((default-directory  "~/.emacs.d/packages/"))
+  (normal-top-level-add-subdirs-to-load-path))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -120,6 +124,12 @@
 ;;      (add-to-list 'smart-shift-mode-alist
 ;;                   '(major-mode-or-derived-mode . customize-base-offset))))
 
+;;; flycheck swagger
+b
+(require 'flycheck-swagger-tools)
+
 (provide 'init)
+
+
 
 ;;; init.el ends here
