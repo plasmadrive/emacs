@@ -32,7 +32,7 @@
     ("ec0c9d1715065a594af90e19e596e737c7b2cdaa18eb1b71baf7ef696adbefb0" default)))
  '(package-selected-packages
    (quote
-    (smart-shift highlight-indent-guides flycheck-demjsonlint flycheck json-mode string-inflection cql-mode feature-mode magit haskell-mode elpy mustache-mode yaml-mode cucumber-goto-step exec-path-from-shell go-complete go-mode))))
+    (sr-speedbar json-navigator smart-shift highlight-indent-guides flycheck-demjsonlint flycheck json-mode string-inflection cql-mode feature-mode magit haskell-mode elpy mustache-mode yaml-mode cucumber-goto-step exec-path-from-shell go-complete go-mode))))
 
 
 
