@@ -125,7 +125,7 @@
 ;;                   '(major-mode-or-derived-mode . customize-base-offset))))
 
 ;;; flycheck swagger
-b
+
 (require 'flycheck-swagger-tools)
 
 (provide 'init)
