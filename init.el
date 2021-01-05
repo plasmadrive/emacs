@@ -1,3 +1,4 @@
+
 ;;; init.el --- Initialization file for Emacs
 ;;; Commentary: Emacs Startup File --- initialization for Emacs
 
@@ -10,13 +11,21 @@
 ;;;Code
 
 ;;; Commentary:
-;; 
+;;
+
+(require 'tls)
 
 (require 'package)
 ;;; Code:
 
+(setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+         '("melpa" . "https://melpa.org/packages/"))
+ (add-to-list 'package-archives
+         '("gnu" . "https://elpa.gnu.org/packages/"))
+ (add-to-list 'package-archives
+       '("melpa3" . "http://www.mirrorservice.org/sites/stable.melpa.org/packages/"))
+
 (package-initialize)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
@@ -30,13 +39,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (ld-dark)))
+ '(custom-enabled-themes '(ld-dark))
  '(custom-safe-themes
-   (quote
-    ("ec0c9d1715065a594af90e19e596e737c7b2cdaa18eb1b71baf7ef696adbefb0" default)))
+   '("ec0c9d1715065a594af90e19e596e737c7b2cdaa18eb1b71baf7ef696adbefb0" default))
  '(package-selected-packages
-   (quote
-    (markdown-mode sr-speedbar json-navigator smart-shift highlight-indent-guides flycheck-demjsonlint flycheck json-mode string-inflection cql-mode feature-mode magit haskell-mode elpy mustache-mode yaml-mode cucumber-goto-step exec-path-from-shell go-complete go-mode))))
+   '(pandoc-mode web-mode terraform-mode pyvenv markdown-mode sr-speedbar json-navigator smart-shift highlight-indent-guides flycheck-demjsonlint flycheck json-mode string-inflection cql-mode feature-mode magit haskell-mode elpy mustache-mode yaml-mode cucumber-goto-step exec-path-from-shell go-complete go-mode)))
 
 
 
@@ -124,12 +131,35 @@
 ;;      (add-to-list 'smart-shift-mode-alist
 ;;                   '(major-mode-or-derived-mode . customize-base-offset))))
 
+(require 'hideshow)
+(require 'sgml-mode)
+(require 'nxml-mode)
+
+(add-to-list 'hs-special-modes-alist
+             '(nxml-mode
+               "<!--\\|<[^/>]*[^/]>"
+               "-->\\|</[^/>]*[^/]>"
+
+               "<!--"
+               sgml-skip-tag-forward
+               nil))
+
+
+
+(add-hook 'nxml-mode-hook 'hs-minor-mode)
+
+;; optional key bindings, easier than hs defaults
+(define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
+
 ;;; flycheck swagger
 
 (require 'flycheck-swagger-tools)
 
 (provide 'init)
 
+
+;;(setenv "WORKON_HOME" "/anaconda3/envs/")
+;;(pyenv-mode 1)
 
 
 ;;; init.el ends here
